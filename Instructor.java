@@ -31,7 +31,7 @@ public class ListTest extends JFrame {
 
       // add a JScrollPane containing JList to content pane
       container.add( new JScrollPane( instructors ) );
-      colorList.addListSelectionListener(
+      instuctorList.addListSelectionListener(
 
          new ListSelectionListener() {  // anonymous inner class
 
