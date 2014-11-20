@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 public class ListTest extends JFrame {
-   private JList colorList;
+   private JList instuctorList;
    private Container container;
 
    private final String instuctorList[] = { "Mr. Jiang", "Mr. Tim", "Mr. DiJackaMo",
