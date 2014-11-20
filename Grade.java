@@ -15,8 +15,10 @@ public class Grade extends JFrame implements ActionListener
 
 	//Java-Classes-------------------
 	CourseList cl = new CourseList();
+	Instructor inst = new Instructor();
 
 	//Admin-Content------
+	int frameType = 0;
 
 	public Grade()
 	{
@@ -50,15 +52,16 @@ public class Grade extends JFrame implements ActionListener
 
 		if(obj == loginButton)
 		{
-			login(name, pass);
+			frameType = inst.login(name, pass);
+         login(frameType);
 		}
 	}
 
-	public void login(String name, String pass)
+	public void login(int x)
 	{
-		if(name.equals("admin") && pass.equals("PASS13"))
+		if(x == 1)
 		{
-			label.setText("Login Successful!");
+			label.setText("Welcome, Admin");
 			setSize(800, 600);
 			setResizable(true);
 		}
