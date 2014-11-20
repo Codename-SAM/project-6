@@ -24,7 +24,7 @@ public class ListTest extends JFrame {
 
       // create a list with items in instructor array
       instuctorList = new JList( colorNames );
-      instuctorListt.setVisibleRowCount( 5 );
+      instuctorList.setVisibleRowCount( 5 );
 
       // do not allow multiple selections
       instuctorList.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
