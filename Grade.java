@@ -8,11 +8,8 @@ public class Grade extends JFrame implements ActionListener
 	private JTextField userField;
 	private JPasswordField passField;
 	private JButton loginButton;
-	//-------------------------------
-
-	private JPanel panel;
 	private JLabel label;
-	private ImageIcon img;
+	//-------------------------------
 
 	public Grade()
 	{
@@ -20,19 +17,16 @@ public class Grade extends JFrame implements ActionListener
 		Container c = getContentPane();
 		setLayout(new FlowLayout());
 
-		panel = new JPanel(new GridLayout(1,1));
-		img = new ImageIcon("EricAndre.gif");
-		label = new JLabel(img);
 
 			//Login-Initialization-----------------------------
 			userField = new JTextField("admin", 10);
 			passField = new JPasswordField("password", 15);
 			loginButton = new JButton("Login");
+			label = new JLabel("Please enter your login information.");
 
 			c.add(userField);
 			c.add(passField);
 			c.add(loginButton);
-
 			c.add(label);
 
 			userField.addActionListener(this);
@@ -41,8 +35,8 @@ public class Grade extends JFrame implements ActionListener
 			//--------------------------------------------------
 
 		setVisible(true);
-		setSize(600, 400);
-		openProgram(0);
+		setResizable(false);
+		setSize(400, 100);
 	}
 
 	public void actionPerformed(ActionEvent e)
@@ -55,28 +49,17 @@ public class Grade extends JFrame implements ActionListener
 		{
 			if(name.equals("admin") && pass.equals("PASS13"))
 			{
-				System.out.println("Successful Login!");
-				openProgram(1);
+				label.setText("Login Successful!"); /* Welcome + name of person );*/
+				setSize(800, 600);
+				setResizable(true);
 			}
 
 			else
 			{
-				openProgram(0);
+				label.setText("Please enter a valid username/password combination.");
+				setSize(400, 100);
+				setResizable(false);
 			}
-		}
-
-	}
-
-	public void openProgram(int x)
-	{
-		if(x == 1)
-		{
-			label.setVisible(true);
-		}
-
-		else
-		{
-			label.setVisible(false);
 		}
 
 	}
@@ -84,6 +67,5 @@ public class Grade extends JFrame implements ActionListener
 	public static void main(String[]args)
 	{
 		Grade g = new Grade();
-		g.setVisible(true);
 	}
 }
