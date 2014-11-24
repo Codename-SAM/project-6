@@ -1,22 +1,36 @@
+import javax.swing.*;
+
 public class CourseList
 {
-	private String[] names = {"MAT107", "ESS101", "WRT200", "HIS100", "CSC142"};
-	private String[] instructor_usr = {"PROF1", "PROF2", "PROF3", "PROF4", "PROF5"};
-	private int[] number_of_enroll;
-	private String[][] student_list;
+	private int namesNum, instructorNum;
+
+	private String[] names;
+	private String[] instructor_usr;
+	private int[] number_of_enroll; //number of studens enrolled
+	private String[][] student_list; //A 2-D array of all the rosters with the respective students in each class, this comes last
 
 	public CourseList()
 	{
-
+		names = new String[namesNum];
+		instructor_usr = new String[instructorNum];
 	}
 
-	public String[] getClasses()
-	{
-		return names;
-	}
+		public void setLength()
+		{
+			String num = JOptionPane.showInputDialog("How many classes should be initialzied?");
+			namesNum = Integer.parseInt(num);
+			num = JOptionPane.showInputDialog("How many professors should be initialized?");
+			instructorNum = Integer.parseInt(num);
+		}
 
-	public void assignStudent(String[] classes, String[][] roster)
-	{
+		public void setCourses()
+		{
+			int count = 0;
+			names[count] = JOptionPane.showInputDialog("Enter the Name of Course " + (count + 1) + ", with the course number and title, like CSC142 Programming in Java");
 
-	}
+			if(count < names.length)
+			{
+				setCourses();
+			}
+		}
 }
