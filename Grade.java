@@ -4,77 +4,64 @@ import javax.swing.*;
 
 public class Grade extends JFrame implements ActionListener
 {
-	Container c = getContentPane();
-
-	//Program-Login-Requirements-----
-	private JTextField userField;
-	private JPasswordField passField;
-	private JButton loginButton;
+	private JTextField username;
+	private JPasswordField password;
 	private JLabel label;
-	//-------------------------------
-
-	//Java-Classes-------------------
-	CourseList cl = new CourseList();
-	Instructor inst = new Instructor();
-
-	//Admin-Content------
-	int frameType = 0;
+	private JButton login;
+	private Container c;
+	private CourseList cl;
 
 	public Grade()
 	{
 		super("Grade");
-		setLayout(new FlowLayout());
+		c = getContentPane();
+		c.setLayout(new FlowLayout());
 
-		userField = new JTextField("admin", 10);
-		passField = new JPasswordField("", 10);
-		loginButton = new JButton("Login");
-		label = new JLabel("Please enter your administrator login information.");
+		cl = new CourseList();
 
-		c.add(userField);
-		c.add(passField);
-		c.add(loginButton);
+		username = new JTextField("admin", 10);
+		password = new JPasswordField("PASS13", 10);
+		label = new JLabel("Please enter the username/password combination.");
+		login = new JButton("Login");
+
+		c.add(username);
+		c.add(password);
 		c.add(label);
+		c.add(login);
 
-		userField.addActionListener(this);
-		passField.addActionListener(this);
-		loginButton.addActionListener(this);
+		username.addActionListener(this);
+		password.addActionListener(this);
+		login.addActionListener(this);
 
-		setVisible(true);
-		setResizable(false);
 		setSize(400, 100);
+		setResizable(false);
+		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e)
 	{
 		Object obj = e.getSource();
-		String name = userField.getText();
-		String pass = passField.getText();
+		String user = username.getText();
+		String pass = password.getText();
 
-		if(obj == loginButton)
+
+		if(obj == login)
 		{
-			frameType = inst.login(name, pass);
-         login(frameType);
+			if(user.equals("admin") && pass.equals("PASS13"))
+			{
+				cl.setLength();
+				cl.setCourses();
+				setVisible(false);
+			}
+
+			else
+			{
+				label.setText("Please try again.");
+			}
 		}
 	}
 
-	public void login(int x)
-	{
-		if(x == 1)
-		{
-			label.setText("Welcome, Admin");
-			setSize(800, 600);
-			setResizable(true);
-		}
-
-		else
-		{
-			label.setText("Please enter a valid username/password combination.");
-			setSize(400, 100);
-			setResizable(false);
-		}
-	}
-
-	public static void main(String[]args)
+	public static void main(String[] args)
 	{
 		Grade g = new Grade();
 	}
