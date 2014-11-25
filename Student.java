@@ -13,13 +13,13 @@ public class Student extends JFrame(){
     
   }
   
-  void setName(String userid){
+  public void setName(String userid){
     this.userid = userid;
   }
   
-  void setPass(String newPass){
+  public void setPass(String newPass){
     this.password = newPass;
   }
   
-  void 
+  
 }
