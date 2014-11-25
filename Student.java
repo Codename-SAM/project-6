@@ -5,6 +5,7 @@ import javax.swing.event.*;
 public class Student extends JFrame(){
   private String userid;
   private String password;
+  private String [] courses = new String[5];
   
   public Student(){
     
@@ -19,4 +20,6 @@ public class Student extends JFrame(){
   void setPass(String newPass){
     this.password = newPass;
   }
+  
+  void 
 }
