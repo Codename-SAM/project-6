@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class Student extends JFrame(){
+public class Student(){
   private String userid;
   private String password;
   private String [] courses = new String[5];
