@@ -1,6 +1,9 @@
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.*;
+import java.awt.*;
 
 public class Grade extends JFrame implements ActionListener
 {
@@ -16,18 +19,26 @@ public class Grade extends JFrame implements ActionListener
 	private JTextField text1;
 
 	private JList list;
-
+   private JTable table;
+   
+   private Object[][] data;
+   private String[] columnNames;
+   
 	private JButton button1;
 	private JButton button2;
 	private JButton button3;
 	private JButton button4;
 	private JButton button5;
 	private JButton button6;
+   
 	private JButton logout;
+   private JButton logout2;
 
 	private JButton resume;
 
 	private JFrame frame;
+   
+   private JPanel panel;
 
 	private Container c;
 	private CourseList cl;
@@ -52,6 +63,7 @@ public class Grade extends JFrame implements ActionListener
 		firstlogin = true;
 
 		frame = new JFrame();
+      panel = new JPanel();
 
 		button1 = new JButton("Designate courses");
 		button2 = new JButton("Designate professors");
@@ -60,9 +72,20 @@ public class Grade extends JFrame implements ActionListener
 		button5 = new JButton("Display professors");
 		button6 = new JButton("Display students");
 		logout = new JButton("Log Out");
+		resume = new JButton("Continue");
+      
+      columnNames = new String[] {"Student Name", "Student ID", "Grades", "Course", "Teacher"};
+      data = new Object[][] 
+             { {"Kathy", "5368", "A", new Integer(5), new Boolean(false)},
+	          {"John", "5368", "B", new Integer(3), new Boolean(true)}, 
+             {"Sue", "5368", "C", new Integer(2), new Boolean(false)},
+             {"Jane", "5368", "D", new Integer(20), new Boolean(true)},
+             {"Joe", "5368", "A", new Integer(10), new Boolean(false)} };
 
-		resume = new JButton("Display Content");
-
+        final JTable table = new JTable(data, columnNames);
+        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        table.setFillsViewportHeight(true);
+        
 		c.add(username);
 		c.add(password);
 		c.add(label);
@@ -78,6 +101,7 @@ public class Grade extends JFrame implements ActionListener
 		button4.addActionListener(this);
 		button5.addActionListener(this);
 		button6.addActionListener(this);
+      resume.addActionListener(this);
 		logout.addActionListener(this);
 
 		setSize(400, 100);
@@ -95,33 +119,35 @@ public class Grade extends JFrame implements ActionListener
 			if(user.equals("admin") && pass.equals("PASS13"))
 			{
 				cl.setLength();
-				firstFrame();
+				adminFrame();
 			}
 
 			else
 			{
 				label.setText("Please try again.");
 			}
+
+			firstlogin = false;
 		}
 
 		if(obj == login && firstlogin == false)
 		{
-			I.login(user, pass);
+         
 		}
 
 			if(obj == button1)
 			{
-				cl.setCourses();
+				
 			}
 
 			if(obj == button2)
 			{
-				cl.setInstructors();
+				
 			}
 
 			if(obj == button3)
 			{
-				cl.setStudents();
+				
 			}
 
 			if(obj == button4)
@@ -138,6 +164,11 @@ public class Grade extends JFrame implements ActionListener
 			{
 				displayStudents(cl.getStudents());
 			}
+         
+         if(obj == resume)
+         {
+            instructorFrame();
+         }
 
 		if(obj == logout)
 		{
@@ -145,20 +176,38 @@ public class Grade extends JFrame implements ActionListener
 		}
 }
 
-	public void firstFrame()
+	public void adminFrame()
 	{
 		c.removeAll();
 		c.setLayout(new GridLayout(3, 2));
 		c.add(button1);
 		c.add(button2);
 		c.add(button3);
-		c.add(button4);
-		c.add(button5);
-		c.add(button6);
+      c.add(resume);
 		c.add(logout);
 		setSize(600, 480);
 		repaint();
 	}
+   
+   public void instructorFrame()
+   {
+      table = new JTable(data, columnNames);
+      table.setPreferredScrollableViewportSize(new Dimension(500, 100));
+      table.setFillsViewportHeight(true);
+      frame.setLayout(new GridLayout(2, 0));
+      frame.add(table);
+      
+      panel.setLayout(new FlowLayout());
+      panel.add(logout);
+      frame.add(panel);
+      frame.setSize(800, 600);
+      frame.setVisible(true);
+   }
+   
+   public void studentFrame()
+   {
+   
+   }
 
 	public void firstScreen()
 	{
@@ -172,69 +221,43 @@ public class Grade extends JFrame implements ActionListener
 		repaint();
 	}
 
-	public void displayStudents(String[] temp)
-	{
-		list = new JList(temp);
-		list.setVisibleRowCount(5);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        new ListSelectionListener()
-        {
-        	public void valueChanged(ListSelectionEvent event)
-        	{
-				list.getSelectedIndex();
-			}
-		}
-		);
-
-		frame.setLayout(new FlowLayout());
-		frame.add(new JScrollPane(list));
-		frame.setSize(300, 300);
-		frame.setVisible(true);
-	}
-
-	public void displayInstructors(String[] temp)
-	{
-		list = new JList(temp);
-		list.setVisibleRowCount(5);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        new ListSelectionListener()
-        {
-        	public void valueChanged(ListSelectionEvent event)
-        	{
-
-			}
-		}
-		);
-
-		frame.setLayout(new FlowLayout());
-		frame.add(new JScrollPane(list));
-		frame.setSize(300, 300);
-		frame.setVisible(true);
-	}
-
-	public void displayCourses(String[] temp)
-	{
-		list = new JList(temp);
-		list.setVisibleRowCount(5);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        new ListSelectionListener()
-        {
-        	public void valueChanged(ListSelectionEvent event)
-        	{
-
-			}
-		}
-		);
-
-		frame.setLayout(new FlowLayout());
-		frame.add(new JScrollPane(list));
-		frame.setSize(300, 300);
-		frame.setVisible(true);
-	}
-
+	   public void displayStudents(String[] temp)
+	   {
+       	list = new JList(temp);
+	   	list.setVisibleRowCount(5);
+	   	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+   
+	   	frame.setLayout(new FlowLayout());
+	   	frame.add(new JScrollPane(list));
+	   	frame.setSize(300, 300);
+	   	frame.setVisible(true);
+	   }
+   
+	   public void displayInstructors(String[] temp)
+	   {
+	   	list = new JList(temp);
+	   	list.setVisibleRowCount(5);
+	   	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+   
+   
+	   	frame.setLayout(new FlowLayout());
+	   	frame.add(new JScrollPane(list));
+	   	frame.setSize(300, 300);
+	   	frame.setVisible(true);
+	   }
+   
+	   public void displayCourses(String[] temp)
+	   {
+	   	list = new JList(temp);
+	   	list.setVisibleRowCount(5);
+	   	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+   
+	   	frame.setLayout(new FlowLayout());
+	   	frame.add(new JScrollPane(list));
+	   	frame.setSize(300, 300);
+	   	frame.setVisible(true);
+	   }
+   
 	public static void main(String[] args)
 	{
 		Grade g = new Grade();
