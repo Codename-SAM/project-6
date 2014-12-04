@@ -12,14 +12,7 @@ public class Grade extends JFrame implements ActionListener
 	private JButton login;
 	private JLabel label;
 
-	private JLabel label1;
-	private JLabel label2;
-	private JLabel label3;
-
-	private JTextField text1;
-
 	private JList list;
-   private JTable table;
    
    private Object[][] data;
    private String[] columnNames;
@@ -41,8 +34,10 @@ public class Grade extends JFrame implements ActionListener
    private JPanel panel;
 
 	private Container c;
+   
 	private CourseList cl;
 	private Instructor I;
+   private SimpleTableDemo table;
 
 	private boolean firstlogin;
 
@@ -54,6 +49,7 @@ public class Grade extends JFrame implements ActionListener
 
 		cl = new CourseList();
 		I = new Instructor();
+      table = new SimpleTableDemo();
 
 		username = new JTextField("admin", 10);
 		password = new JPasswordField("PASS13", 10);
@@ -65,27 +61,16 @@ public class Grade extends JFrame implements ActionListener
 		frame = new JFrame();
       panel = new JPanel();
 
-		button1 = new JButton("Designate courses");
-		button2 = new JButton("Designate professors");
+		button1 = new JButton("Students");
+		button2 = new JButton("Instructors");
 		button3 = new JButton("Designate students");
 		button4 = new JButton("Display courses");
 		button5 = new JButton("Display professors");
 		button6 = new JButton("Display students");
 		logout = new JButton("Log Out");
+      logout2 = new JButton("Log Out");
 		resume = new JButton("Continue");
-      
-      columnNames = new String[] {"Student Name", "Student ID", "Grades", "Course", "Teacher"};
-      data = new Object[][] 
-             { {"Kathy", "5368", "A", new Integer(5), new Boolean(false)},
-	          {"John", "5368", "B", new Integer(3), new Boolean(true)}, 
-             {"Sue", "5368", "C", new Integer(2), new Boolean(false)},
-             {"Jane", "5368", "D", new Integer(20), new Boolean(true)},
-             {"Joe", "5368", "A", new Integer(10), new Boolean(false)} };
-
-        final JTable table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
-        
+     
 		c.add(username);
 		c.add(password);
 		c.add(label);
@@ -103,6 +88,7 @@ public class Grade extends JFrame implements ActionListener
 		button6.addActionListener(this);
       resume.addActionListener(this);
 		logout.addActionListener(this);
+      logout2.addActionListener(this);
 
 		setSize(400, 100);
 		setVisible(true);
@@ -118,7 +104,6 @@ public class Grade extends JFrame implements ActionListener
 		{
 			if(user.equals("admin") && pass.equals("PASS13"))
 			{
-				cl.setLength();
 				adminFrame();
 			}
 
@@ -137,12 +122,12 @@ public class Grade extends JFrame implements ActionListener
 
 			if(obj == button1)
 			{
-				
+				studentFrame();
 			}
 
 			if(obj == button2)
 			{
-				
+				instructorFrame();
 			}
 
 			if(obj == button3)
@@ -152,37 +137,43 @@ public class Grade extends JFrame implements ActionListener
 
 			if(obj == button4)
 			{
-				displayCourses(cl.getCourses());
+
 			}
 
 			if(obj == button5)
 			{
-				displayInstructors(cl.getInstructors());
+
 			}
 
 			if(obj == button6)
 			{
-				displayStudents(cl.getStudents());
+
 			}
          
          if(obj == resume)
          {
             instructorFrame();
          }
+         
+      if(obj == logout2)
+      {
+         frame.setVisible(false);
+         c.setVisible(true);
+      }
 
 		if(obj == logout)
 		{
 			firstScreen();
+         frame.setVisible(false);
 		}
 }
 
 	public void adminFrame()
 	{
 		c.removeAll();
-		c.setLayout(new GridLayout(3, 2));
-		c.add(button1);
-		c.add(button2);
-		c.add(button3);
+		c.setLayout(new GridLayout(2, 3));
+      c.add(button1);
+      c.add(button2);
       c.add(resume);
 		c.add(logout);
 		setSize(600, 480);
@@ -191,22 +182,13 @@ public class Grade extends JFrame implements ActionListener
    
    public void instructorFrame()
    {
-      table = new JTable(data, columnNames);
-      table.setPreferredScrollableViewportSize(new Dimension(500, 100));
-      table.setFillsViewportHeight(true);
-      frame.setLayout(new GridLayout(2, 0));
-      frame.add(table);
-      
-      panel.setLayout(new FlowLayout());
-      panel.add(logout);
-      frame.add(panel);
-      frame.setSize(800, 600);
-      frame.setVisible(true);
+      c.setVisible(false);
+      table.createAndShowGUI();
    }
    
    public void studentFrame()
    {
-   
+      c.setVisible(false);
    }
 
 	public void firstScreen()
@@ -220,44 +202,7 @@ public class Grade extends JFrame implements ActionListener
 		setLayout(new FlowLayout());
 		repaint();
 	}
-
-	   public void displayStudents(String[] temp)
-	   {
-       	list = new JList(temp);
-	   	list.setVisibleRowCount(5);
-	   	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-   
-	   	frame.setLayout(new FlowLayout());
-	   	frame.add(new JScrollPane(list));
-	   	frame.setSize(300, 300);
-	   	frame.setVisible(true);
-	   }
-   
-	   public void displayInstructors(String[] temp)
-	   {
-	   	list = new JList(temp);
-	   	list.setVisibleRowCount(5);
-	   	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-   
-   
-	   	frame.setLayout(new FlowLayout());
-	   	frame.add(new JScrollPane(list));
-	   	frame.setSize(300, 300);
-	   	frame.setVisible(true);
-	   }
-   
-	   public void displayCourses(String[] temp)
-	   {
-	   	list = new JList(temp);
-	   	list.setVisibleRowCount(5);
-	   	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-   
-	   	frame.setLayout(new FlowLayout());
-	   	frame.add(new JScrollPane(list));
-	   	frame.setSize(300, 300);
-	   	frame.setVisible(true);
-	   }
-   
+      
 	public static void main(String[] args)
 	{
 		Grade g = new Grade();
