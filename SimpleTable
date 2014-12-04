@@ -6,13 +6,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-public class SimpleTable extends JPanel 
+public class Table extends JPanel 
 {
    private boolean DEBUG = false;
    private Object[][] data;
    private String[] columnNames;
    
-   public SimpleTable() 
+   public Table() 
    {
       super(new GridLayout(1,0));
       columnNames = new String[] {"Student Name",
@@ -74,7 +74,7 @@ public static void createAndShowGUI()
 {
    JFrame frame = new JFrame("StudentList");
    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   SimpleTable newContentPane = new SimpleTable();
+   Table newContentPane = new Table();
    newContentPane.setOpaque(true); 
    frame.setContentPane(newContentPane);
    frame.pack();
