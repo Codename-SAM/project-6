@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-public class SimpleTableDemo extends JPanel 
+public class SimpleTable extends JPanel 
 {
    private boolean DEBUG = false;
    private Object[][] data;
@@ -74,7 +74,7 @@ public static void createAndShowGUI()
 {
    JFrame frame = new JFrame("StudentList");
    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   SimpleTableDemo newContentPane = new SimpleTableDemo();
+   SimpleTable newContentPane = new SimpleTable();
    newContentPane.setOpaque(true); 
    frame.setContentPane(newContentPane);
    frame.pack();
