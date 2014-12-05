@@ -1,7 +1,3 @@
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.awt.*;
 
@@ -11,12 +7,7 @@ public class Grade extends JFrame implements ActionListener
 	private JPasswordField password;
 	private JButton login;
 	private JLabel label;
-
-	private JList list;
-   
-   private Object[][] data;
-   private String[] columnNames;
-   
+ 
 	private JButton button1;
 	private JButton button2;
 	private JButton button3;
@@ -28,16 +19,14 @@ public class Grade extends JFrame implements ActionListener
    private JButton logout2;
 
 	private JButton resume;
-
 	private JFrame frame;
-   
    private JPanel panel;
 
 	private Container c;
    
 	private CourseList cl;
 	private Instructor I;
-   private SimpleTableDemo table;
+   private Table table;
 
 	private boolean firstlogin;
 
@@ -49,7 +38,7 @@ public class Grade extends JFrame implements ActionListener
 
 		cl = new CourseList();
 		I = new Instructor();
-      table = new SimpleTableDemo();
+      table = new Table();
 
 		username = new JTextField("admin", 10);
 		password = new JPasswordField("PASS13", 10);
@@ -152,13 +141,13 @@ public class Grade extends JFrame implements ActionListener
          
          if(obj == resume)
          {
-            instructorFrame();
+            
          }
          
       if(obj == logout2)
       {
-         frame.setVisible(false);
          c.setVisible(true);
+         frame.setVisible(false);
       }
 
 		if(obj == logout)
