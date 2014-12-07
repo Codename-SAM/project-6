@@ -1,64 +1,72 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+public class Login extends JFrame implements ActionListener
+{
+	private JPanel panel;
+	private JButton button;
 
-public class Log extends JFrame {
+	private Container c;
 
-public static void main(String[] args) {
-Log frameTabel = new Log();
-}
+	private boolean confirmation;
 
-JButton blogin = new JButton("Login");
-JPanel panel = new JPanel();
-JTextField txuser = new JTextField(15);
-JPasswordField pass = new JPasswordField(15);
+	private JTextField username;
+	private JPasswordField password;
 
-Log(){
-super("Login Autentification");
-setSize(300,200);
-setLocation(500,280);
-panel.setLayout (null); 
+	Login()
+	{
+		super("Login");
+		setSize(300,200);
+		setLocation(500,280);
+
+		username = new JTextField("admin", 10);
+		password = new JPasswordField("PASS13", 10);
+
+		c = getContentPane();
+
+		panel.setLayout(new FlowLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		button.addActionListener(this);
+	}
 
 
-txuser.setBounds(70,30,150,20);
-pass.setBounds(70,65,150,20);
-blogin.setBounds(110,100,80,20);
+	public void actionPerformed(ActionEvent e)
+	{
+		String user = username.getText();
+		String pass = password.getText();
 
-panel.add(blogin);
-panel.add(txuser);
-panel.add(pass);
+		if(user.equals("admin") && pass.equals("PASS13"))
+		{
+			confirmation = true;
+		}
 
-getContentPane().add(panel);
-setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-setVisible(true);
-actionlogin();
-}
+		else
+		{
+			confirmation = false;
+			JOptionPane.showMessageDialog(null, "Wrong Password / Username");
+			username.requestFocus();
+		}
+	}
 
-public void actionlogin(){
-blogin.addActionListener(new ActionListener() {
-public void actionPerformed(ActionEvent ae) {
-String puname = txuser.getText();
-String ppaswd = pass.getText();
-if(puname.equals("admin") && ppaswd.equals("pass14"))  {
-newframe regFace =new newframe();
-regFace.setVisible(true);
-dispose();
-}
-if(puname.equals("student") && ppaswd.equals("pass14"))  {
-studentframe regFace =new studentframe();
-regFace.setVisible(true);
-dispose();
-} 
+	public void loginFrame()
+	{
+		c.removeAll();
+		c.add(username);
+		c.add(password);
+		c.add(button);
+		setSize(400, 100);
+		setLayout(new FlowLayout());
+		repaint();
+	}
 
-else {
+	public boolean getCondition()
+	{
+		return confirmation;
+	}
 
-JOptionPane.showMessageDialog(null,"Wrong Password / Username");
-txuser.setText("Username");
-pass.setText("");
-txuser.requestFocus();
-}
-
-}
-});
-}
+	public static void main(String[] args)
+	{
+		Login frameTable = new Login();
+	}
 }
