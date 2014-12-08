@@ -6,7 +6,7 @@ import java.util.ArrayList
 public class Student(){
   private String userid;
   private String password;
-  private String [] courses = new String[]{"Courses: "};
+  private ArrayList<String> courses = new ArrayList<String>(); 
   private double [][] hwGrade = new double [1][1];
   
   public Student(){
@@ -24,13 +24,11 @@ public class Student(){
   }
   
   public void updateCourses(String newCourse){
-    String [] updatedCourses = new String[courses.length + 1]; //instantiate the copy array
-    int i = 0;
-    for(; i<courses.length; i++){
-      updatedCourses[i] = courses[i]; //copy the elements
-      updatedCourses[courses.length] = [newCourse]; //the last index of the new array becomes the latest course
-      RETURN THIS SUCH THAT THE COURSES ATTRIBUTE = THE UPDATED COURSES
-    }
+    courses.add(newCourse);
+  }
+  
+
+    
     
     
   }
