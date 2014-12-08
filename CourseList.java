@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class CourseList
 {
-	private int namesNum = 0, instructorNum = 0, studentNum = 0;
+	public int namesNum = 0, instructorNum = 0, studentNum = 0;
 
 	private String[] names;          //number of classes
 	private String[] instructor_usr; //number of professors
@@ -15,17 +15,17 @@ public class CourseList
 
 	}
 
-			public void setLength()
+		public void setLength()
+		{
+			String num;
+
+			while(namesNum < 1)
 			{
-				String num;
+				num = JOptionPane.showInputDialog("How many courses should be initialzied?");
+				namesNum = Integer.parseInt(num);
+			}
 
-				while(namesNum < 1)
-				{
-					num = JOptionPane.showInputDialog("How many classes should be initialzied?");
-					namesNum = Integer.parseInt(num);
-				}
-
-				names = new String[namesNum];
+			names = new String[namesNum];
 
 				while(instructorNum < 2)
 				{
@@ -42,7 +42,7 @@ public class CourseList
 				}
 
 				students = new String[studentNum];
-			}
+		}
 
 			public String[] getCourses()
 			{
@@ -76,25 +76,16 @@ public class CourseList
 
 				public void setCourses()
 				{
-					for(int a=0; a < names.length; a++)
-					{
-						names[a] = JOptionPane.showInputDialog("Set the name of course " + (a + 1));
-					}
+
 				}
 
 				public void setStudents()
 				{
-					for(int a=0; a < students.length; a++)
-					{
-						students[a] = JOptionPane.showInputDialog("Set the name of student " + (a + 1));
-					}
+
 				}
 
 				public void setInstructors()
 				{
-					for(int a=0; a < instructor_usr.length; a++)
-					{
-						instructor_usr[a] = JOptionPane.showInputDialog("Set the name of instructor " + (a + 1));
-					}
+
 				}
 }
