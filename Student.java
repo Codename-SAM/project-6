@@ -5,7 +5,7 @@ import java.util.ArrayList
 
 
 public class Student(){
-  private String [][] userList = new String [5][2];
+  private String [][] userList = new String [studentNum][2];
   private ArrayList<String> courses = new ArrayList<String>(); 
   private double [][] hwGrade = new double [1][1];
   private double [][] projGrade = new double[1][1];
