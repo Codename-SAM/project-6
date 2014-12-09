@@ -9,6 +9,8 @@ public class Student(){
   private ArrayList<String> courses = new ArrayList<String>(); 
   private double [][] hwGrade = new double [1][1];
   private double [][] projGrade = new double[1][1];
+  private double [][] testGrade = new double [2][2];
+  private char [][] letterGrades = new char[studentNum][2];
   
   public Student(){
     
@@ -28,6 +30,17 @@ public class Student(){
     courses.add(newCourse);
   }
   
+  private void addHWGrade(double newGrade){
+    
+  }
+  
+  private void addProjGrade(double newGrade){
+    
+  }
+  
+  private void addTestGrade(double newGrade){
+    
+  }
 
     
     
